@@ -1,90 +1,58 @@
-/* Global Styles */
-body {
-    margin: 0;
-    font-family: "Roboto", Arial, sans-serif;
-    background: linear-gradient(135deg, #ece9e6, #ffffff);
-    color: #333;
-  }
-  
-  .app-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  header {
-    margin-bottom: 20px;
-  }
-  
-  header h1 {
-    font-size: 2.5rem;
-    color: #4caf50;
-    margin: 10px 0;
-  }
-  
-  header p {
-    font-size: 1rem;
-    color: #777;
-  }
-  
-  /* Buttons */
-  .button, .submit-button {
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #fff;
-    background: #4caf50;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .button:hover, .submit-button:hover {
-    background: #388e3c;
-  }
-  
-  /* File Inputs */
-  input[type="file"] {
-    display: none;
-  }
-  
-  /* Result Card */
-  .result-card {
-    margin-top: 20px;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    width: 300px;
-    text-align: center;
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  
-  .result-card h2 {
-    font-size: 1.5rem;
-    color: #4caf50;
-  }
-  
-  .result-card p {
-    font-size: 1.2rem;
-    color: #555;
-  }
-  
-  /* Animations */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
+.app-container {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+}
+
+header {
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #333;
+}
+
+.upload-container {
+  margin-bottom: 20px;
+}
+
+.button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.submit-button {
+  background-color: #008CBA;
+  color: white;
+  padding: 15px 25px;
+  font-size: 1.2em;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.submit-button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.result-card {
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.result-card h2 {
+  margin-bottom: 10px;
+}
+
+.error-message {
+  margin-top: 20px;
+  color: red;
+}

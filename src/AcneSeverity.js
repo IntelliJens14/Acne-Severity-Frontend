@@ -6,8 +6,14 @@ function AcneSeverity() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [severityLevel, setSeverityLevel] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file);
+  };
+
+  const handleCameraCapture = (e) => {
     const file = e.target.files[0];
     setSelectedImage(file);
   };
@@ -23,21 +29,21 @@ function AcneSeverity() {
 
     try {
       setLoading(true);
-      const response = await axios.post("https://acne-severity.onrender.com/api/predict", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      setError(null);  // Reset error message
+      const response = await axios.post(
+        "https://efdb-34-125-15-146.ngrok-free.app/api/predict", // Updated URL
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       setSeverityLevel(response.data.severityLevel);
       setLoading(false);
     } catch (error) {
       console.error("Error during prediction:", error);
-      alert("Error processing the image.");
+      setError("Error processing the image.");
       setLoading(false);
     }
-  };
-
-  const handleCameraCapture = (e) => {
-    const file = e.target.files[0];
-    setSelectedImage(file);
   };
 
   return (
@@ -48,6 +54,7 @@ function AcneSeverity() {
       </header>
 
       <div className="upload-container">
+        {/* Camera capture input */}
         <input
           type="file"
           accept="image/*"
@@ -59,6 +66,7 @@ function AcneSeverity() {
           Use Camera
         </label>
 
+        {/* Gallery upload input */}
         <input
           type="file"
           accept="image/*"
@@ -69,15 +77,24 @@ function AcneSeverity() {
           Upload from Gallery
         </label>
 
+        {/* Submit button */}
         <button onClick={handleSubmit} className="submit-button">
           {loading ? "Processing..." : "Submit"}
         </button>
       </div>
 
+      {/* Display the result */}
       {severityLevel && (
         <div className="result-card">
           <h2>Severity Level</h2>
           <p>{severityLevel}</p>
+        </div>
+      )}
+
+      {/* Display error message */}
+      {error && (
+        <div className="error-message">
+          <p>{error}</p>
         </div>
       )}
     </div>
