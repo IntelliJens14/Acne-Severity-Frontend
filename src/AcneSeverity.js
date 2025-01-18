@@ -8,7 +8,6 @@ function AcneSeverity() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
-  // Start camera on component mount
   useEffect(() => {
     const startCamera = async () => {
       try {
@@ -25,7 +24,6 @@ function AcneSeverity() {
   const handleCaptureAndSubmit = async () => {
     if (!canvasRef.current || !videoRef.current) return;
 
-    // Capture current frame from the video feed
     const canvas = canvasRef.current;
     const video = videoRef.current;
     const context = canvas.getContext("2d");
@@ -34,7 +32,6 @@ function AcneSeverity() {
     canvas.height = video.videoHeight;
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    // Convert the canvas image to a blob for submission
     canvas.toBlob(async (blob) => {
       const formData = new FormData();
       formData.append("image", blob, "capture.jpg");
@@ -48,6 +45,8 @@ function AcneSeverity() {
             headers: { "Content-Type": "multipart/form-data" },
           }
         );
+
+        // Use server's response for severity level
         setSeverityLevel(response.data.severityLevel);
       } catch (error) {
         console.error("Error during prediction:", error);
@@ -67,22 +66,22 @@ function AcneSeverity() {
       <div className="upload-container">
         <video ref={videoRef} autoPlay muted className="video-feed"></video>
         <canvas ref={canvasRef} className="hidden-canvas"></canvas>
-        <div className="detection-banner">Detected Severity</div>
+        <div className="detection-result">
+          {severityLevel ? severityLevel : "Detected Severity"}
+        </div>
       </div>
 
-      <button onClick={handleCaptureAndSubmit} className="button">
-        {loading ? "Processing..." : "Detect"}
-      </button>
-
-      {severityLevel && (
-        <div className="result-card">
-          <h2>Severity Level</h2>
-          <p>{severityLevel}</p>
-        </div>
-      )}
+      <div className="button-container">
+        <button onClick={handleCaptureAndSubmit} className="button camera-button">
+          {loading ? "Processing..." : "Capture"}
+        </button>
+        <button className="button gallery-button">
+          Upload from Gallery
+        </button>
+      </div>
 
       <footer>
-        Acne Severity AI © 2025
+        Acne Severity AI ©
       </footer>
     </div>
   );
