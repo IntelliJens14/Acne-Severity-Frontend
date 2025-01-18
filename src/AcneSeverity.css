@@ -1,58 +1,96 @@
-.app-container {
+/* AcneSeverity.css */
+
+body {
+  margin: 0;
   font-family: Arial, sans-serif;
+  background-color: #6fe7f8;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.app-container {
   text-align: center;
-  margin: 20px;
 }
 
-header {
-  margin-bottom: 30px;
+header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
-h1 {
-  font-size: 2.5em;
-  color: #333;
+header p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
 }
 
 .upload-container {
-  margin-bottom: 20px;
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 2px solid #000;
+}
+
+.upload-container::after {
+  content: "Detected Severity";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to right, #2ec7c9, #72d572);
+  color: #000;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 0.5rem;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  margin: 10px;
+  display: inline-block;
+  margin: 1rem 0.5rem;
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+  text-align: center;
+  background: linear-gradient(to right, #2ec7c9, #72d572);
+  border: none;
+  border-radius: 50px;
   cursor: pointer;
-  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.submit-button {
-  background-color: #008CBA;
-  color: white;
-  padding: 15px 25px;
-  font-size: 1.2em;
-  cursor: pointer;
-  border-radius: 5px;
+.button:hover {
+  opacity: 0.9;
 }
 
-.submit-button:disabled {
-  background-color: #ddd;
-  cursor: not-allowed;
+input[type="file"] {
+  display: none;
 }
 
 .result-card {
-  margin-top: 20px;
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
 }
 
 .result-card h2 {
-  margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-.error-message {
-  margin-top: 20px;
-  color: red;
+.result-card p {
+  font-size: 1.2rem;
+}
+
+footer {
+  position: fixed;
+  bottom: 1rem;
+  width: 100%;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #000;
 }

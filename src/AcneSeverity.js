@@ -6,14 +6,8 @@ function AcneSeverity() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [severityLevel, setSeverityLevel] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    setSelectedImage(file);
-  };
-
-  const handleCameraCapture = (e) => {
     const file = e.target.files[0];
     setSelectedImage(file);
   };
@@ -29,9 +23,8 @@ function AcneSeverity() {
 
     try {
       setLoading(true);
-      setError(null);  // Reset error message
       const response = await axios.post(
-        "https://efdb-34-125-15-146.ngrok-free.app/api/predict", // Updated URL
+        "https://9968-34-126-88-47.ngrok-free.app/api/predict",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -41,20 +34,24 @@ function AcneSeverity() {
       setLoading(false);
     } catch (error) {
       console.error("Error during prediction:", error);
-      setError("Error processing the image.");
+      alert("Error processing the image.");
       setLoading(false);
     }
+  };
+
+  const handleCameraCapture = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file);
   };
 
   return (
     <div className="app-container">
       <header>
-        <h1>Acne Severity Detection</h1>
-        <p>Scan your skin or upload a photo to detect acne severity.</p>
+        <h1>ACNE AI</h1>
       </header>
 
       <div className="upload-container">
-        {/* Camera capture input */}
+        {/* Upload Button */}
         <input
           type="file"
           accept="image/*"
@@ -63,10 +60,12 @@ function AcneSeverity() {
           onChange={handleCameraCapture}
         />
         <label htmlFor="camera" className="button">
-          Use Camera
+          <span role="img" aria-label="camera">
+            📷
+          </span>
         </label>
 
-        {/* Gallery upload input */}
+        {/* Gallery Upload */}
         <input
           type="file"
           accept="image/*"
@@ -74,16 +73,16 @@ function AcneSeverity() {
           onChange={handleImageUpload}
         />
         <label htmlFor="gallery" className="button">
-          Upload from Gallery
+          <span role="img" aria-label="gallery">
+            🖼️
+          </span>
         </label>
 
-        {/* Submit button */}
-        <button onClick={handleSubmit} className="submit-button">
+        <button onClick={handleSubmit} className="button">
           {loading ? "Processing..." : "Submit"}
         </button>
       </div>
 
-      {/* Display the result */}
       {severityLevel && (
         <div className="result-card">
           <h2>Severity Level</h2>
@@ -91,12 +90,9 @@ function AcneSeverity() {
         </div>
       )}
 
-      {/* Display error message */}
-      {error && (
-        <div className="error-message">
-          <p>{error}</p>
-        </div>
-      )}
+      <footer>
+        Acne Severity AI ©
+      </footer>
     </div>
   );
 }
